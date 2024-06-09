@@ -4,45 +4,58 @@
 
 |Column             |Type    |Options  |
 |-------------------|--------|---------|
-|Nickname           |string  |NOT NULL |
-|email              |string  |NOT NULL, UNIQUE |
-|encrypted_password |string  |NOT NULL |
-|name               |string  |NOT NULL |
-|name_kana          |string  |NOT NULL |
-|birth_date         |integer |NOT NULL |
+|Nickname           |string  |not null |
+|email              |string  |not null, unique |
+|encrypted_password |string  |not null |
+|first_name         |string  |not null |
+|last_name          |string  |not null |
+|first_name_kana    |string  |not null |
+|last_name_kana     |string  |not null |
+|birth_date         |date    |not null |
+
+- has_many :items
+- has_many :purchases
 
 ## items テーブル
 
 |Column             |Type       |Options  |
 |-------------------|-----------|---------|
-|item_name          |string     |NOT NULL |
-|item_explanation   |text       |NOT NULL |
-|item_category      |text       |NOT NULL |
-|item_condition     |text       |NOT NULL |
-|shipping_fee       |text       |NOT NULL |
-|ship_from          |text       |NOT NULL |
-|shipping_days      |integer    |NOT NULL |
-|item_price         |integer    |NOT NULL |
-|user               |references |NOT NULL, 外部キー |
+|item_name          |string     |not null |
+|item_explanation   |text       |not null |
+|item_category_id   |integer    |not null |
+|item_condition_id  |integer    |not null |
+|shipping_fee_id    |integer    |not null |
+|prefecture_id      |string     |not null |
+|shipping_days_id   |integer    |not null |
+|item_price         |integer    |not null |
+|user               |references |not null, foreign_key |
+
+-belongs_to :users
+-has_one :purchases
 
 ## purchases テーブル
 |Column             |Type       |Options  |
 |-------------------|-----------|---------|
-|item_name          |references |NOT NULL, 外部キー |
-|item_price         |references |NOT NULL, 外部キー |
-|user               |references |NOT NULL, 外部キー |
-|shipping_address   |references |NOT NULL, 外部キー |
+|item               |references |not null, foreign_key |
+|user               |references |not null, foreign_key |
+
+-belongs_to :users
+-belongs_to :items
+-has_one :shipping
+
 
 ## shipping テーブル
 |Column             |Type       |Options  |
 |-------------------|-----------|---------|
-|post_code          |integer    |NOT NULL |
-|prefecture         |text       |NOT NULL |
-|city               |text       |NOT NULL |
-|street             |text       |NOT NULL |
-|building           |text       |         |
-|tel_number         |integer    |NOT NULL |
-|user               |references |NOT NULL, 外部キー |
+|post_code          |string     |not null |
+|prefecture_id      |string     |not null |
+|city               |string     |not null |
+|street             |string     |not null |
+|building           |string     |         |
+|tel_number         |string     |not null |
+|purchase           |references |not null, foreign_key |
+
+-belongs to :purchases
 
 
 
