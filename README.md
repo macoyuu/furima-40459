@@ -1,24 +1,78 @@
-# README
+#テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+|Column             |Type    |Options     |
+|-------------------|--------|------------|
+|nickname           |string  |null: false |
+|email              |string  |null: false, unique:true |
+|encrypted_password |string  |null: false |
+|first_name         |string  |null: false |
+|last_name          |string  |null: false |
+|first_name_kana    |string  |null: false |
+|last_name_kana     |string  |null: false |
+|birth_date         |date    |null: false |
 
-* Ruby version
+- has_many :items
+- has_many :purchases
 
-* System dependencies
+## items テーブル
 
-* Configuration
+|Column             |Type       |Options     |
+|-------------------|-----------|------------|
+|item_name          |string     |null: false |
+|item_explanation   |text       |null: false |
+|item_category_id   |integer    |null: false |
+|item_condition_id  |integer    |null: false |
+|shipping_fee_id    |integer    |null: false |
+|prefecture_id      |integer    |null: false |
+|shipping_day_id    |integer    |null: false |
+|item_price         |integer    |null: false |
+|user               |references |null: false, foreign_key: true |
 
-* Database creation
+- belongs_to :user
+- has_one :purchase
 
-* Database initialization
+## purchases テーブル
+|Column             |Type       |Options  |
+|-------------------|-----------|---------|
+|item               |references |null: false, foreign_key: true |
+|user               |references |null: false, foreign_key: true |
 
-* How to run the test suite
+- belongs_to :user
+- belongs_to :item
+- has_one :shipping
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## shippings テーブル
+|Column             |Type       |Options     |
+|-------------------|-----------|------------|
+|post_code          |string     |null: false |
+|prefecture_id      |integer    |null: false |
+|city               |string     |null: false |
+|street             |string     |null: false |
+|building           |string     |            |
+|tel_number         |string     |null: false |
+|purchase           |references |null: false, foreign_key: true |
 
-* ...
+- belongs_to :purchase
+
+
+
+### Association
+- user
+   - has_many :items
+   - has_many :purchases
+
+- item
+   - belongs_to :user
+   - has_one :purchase
+
+- purchase
+   - belongs_to :user
+   - belongs_to :item
+   - has_one :shipping
+
+- shipping
+   - belongs to :purchase
+
