@@ -44,11 +44,11 @@
 - has_one :shipping
 
 
-## shipping テーブル
+## shippings テーブル
 |Column             |Type       |Options  |
 |-------------------|-----------|---------|
 |post_code          |string     |not null |
-|prefecture_id      |string     |not null |
+|prefecture_id      |integer    |not null |
 |city               |string     |not null |
 |street             |string     |not null |
 |building           |string     |         |
