@@ -5,7 +5,7 @@
 |Column             |Type    |Options     |
 |-------------------|--------|------------|
 |nickname           |string  |null: false |
-|email              |string  |null: false, unique |
+|email              |string  |null: false, unique:true |
 |encrypted_password |string  |null: false |
 |first_name         |string  |null: false |
 |last_name          |string  |null: false |
@@ -26,7 +26,7 @@
 |item_condition_id  |integer    |null: false |
 |shipping_fee_id    |integer    |null: false |
 |prefecture_id      |integer    |null: false |
-|shipping_days_id   |integer    |null: false |
+|shipping_day_id    |integer    |null: false |
 |item_price         |integer    |null: false |
 |user               |references |null: false, foreign_key: true |
 
