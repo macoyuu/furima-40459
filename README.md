@@ -4,7 +4,7 @@
 
 |Column             |Type    |Options  |
 |-------------------|--------|---------|
-|Nickname           |string  |not null |
+|nickname           |string  |not null |
 |email              |string  |not null, unique |
 |encrypted_password |string  |not null |
 |first_name         |string  |not null |
@@ -25,13 +25,13 @@
 |item_category_id   |integer    |not null |
 |item_condition_id  |integer    |not null |
 |shipping_fee_id    |integer    |not null |
-|prefecture_id      |string     |not null |
+|prefecture_id      |integer    |not null |
 |shipping_days_id   |integer    |not null |
 |item_price         |integer    |not null |
 |user               |references |not null, foreign_key |
 
--belongs_to :users
--has_one :purchases
+- belongs_to :user
+- has_one :purchase
 
 ## purchases テーブル
 |Column             |Type       |Options  |
@@ -39,9 +39,9 @@
 |item               |references |not null, foreign_key |
 |user               |references |not null, foreign_key |
 
--belongs_to :users
--belongs_to :items
--has_one :shipping
+- belongs_to :user
+- belongs_to :item
+- has_one :shipping
 
 
 ## shipping テーブル
@@ -55,7 +55,7 @@
 |tel_number         |string     |not null |
 |purchase           |references |not null, foreign_key |
 
--belongs to :purchases
+- belongs_to :purchase
 
 
 
@@ -65,14 +65,14 @@
    - has_many :purchases
 
 - items
-   -belongs_to :users
-   -has_one :purchases
+   - belongs_to :user
+   - has_one :purchase
 
 - buy
-   -belongs_to :users
-   -belongs_to :items
-   -has_one :shipping
+   - belongs_to :user
+   - belongs_to :item
+   - has_one :shipping
 
 - shipping
-   -belongs to :purchases
+   - belongs to :purchase
 
