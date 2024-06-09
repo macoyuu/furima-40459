@@ -64,11 +64,11 @@
    - has_many :items
    - has_many :purchases
 
-- items
+- item
    - belongs_to :user
    - has_one :purchase
 
-- buy
+- purchase
    - belongs_to :user
    - belongs_to :item
    - has_one :shipping
