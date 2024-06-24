@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :user
   belongs_to :item_category
   belongs_to :item_condition
   belongs_to :shipping_fee
@@ -21,6 +22,6 @@ class Item < ApplicationRecord
   validates :image, presence: true
 
 
-  belongs_to :user
+
  #has_one :purchase
 end
