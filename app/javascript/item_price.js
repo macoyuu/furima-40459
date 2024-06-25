@@ -8,6 +8,5 @@ window.addEventListener('turbo:load', () => {
     const profitDom = document.getElementById("profit");
     const profit = inputValue - fee;
     profitDom.innerHTML = Math.floor(profit);
-    console.log(inputValue);
   })
 });
