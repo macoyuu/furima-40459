@@ -17,7 +17,7 @@ RSpec.describe Item, type: :model do
         @item.item_name = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Item name can't be blank")
-      end  
+      end
       it 'item_explanationが空では登録できない' do
         @item.item_explanation = ''
         @item.valid?
@@ -81,22 +81,22 @@ RSpec.describe Item, type: :model do
       it 'item_priceが空では登録できない' do
         @item.item_price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item price is invalid")
+        expect(@item.errors.full_messages).to include('Item price is invalid')
       end
       it '価格に半角数字以外が含まれている場合は出品できない（※半角数字以外が一文字でも含まれていれば良い）' do
         @item.item_price = '300あ'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item price is invalid")
+        expect(@item.errors.full_messages).to include('Item price is invalid')
       end
       it '価格が300円未満では出品できない' do
         @item.item_price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item price is invalid")
+        expect(@item.errors.full_messages).to include('Item price is invalid')
       end
       it '価格が9_999_999円を超えると出品できない' do
-        @item.item_price = 10000000
+        @item.item_price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item price is invalid")
+        expect(@item.errors.full_messages).to include('Item price is invalid')
       end
       it 'userが紐付いていないと保存できない' do
         @item.user = nil
@@ -106,5 +106,3 @@ RSpec.describe Item, type: :model do
     end
   end
 end
-
-
