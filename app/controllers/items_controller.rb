@@ -38,16 +38,16 @@ class ItemsController < ApplicationController
     end
   end
 
-  def ensure_correct_user
-    return if current_user.id == @item.user_id
-  
-    redirect_to root_path
-  end
-
   private
   
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def ensure_correct_user
+    return if current_user.id == @item.user_id
+  
+    redirect_to root_path
   end
 
   def item_params
