@@ -9,7 +9,7 @@ RSpec.describe PurchaseShipping, type: :model do
 
   describe '商品購入機能' do
     context '購入できる場合' do
-      it 'user_id、item_id、post_code、prefecture_id、city、street、building、tel_numberが存在すれば登録できる' do
+      it 'user_id、item_id、post_code、prefecture_id、city、street、building、tel_number、tokenが存在すれば登録できる' do
         expect(@purchase_shipping).to be_valid
       end
       it 'buildingは空でも保存できること' do
@@ -73,6 +73,11 @@ RSpec.describe PurchaseShipping, type: :model do
         @purchase_shipping.item_id = nil
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include("Item can't be blank")
+      end
+      it "tokenが空では登録できないこと" do
+        @purchase_shipping.token = nil
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("Token カード情報を入力してください")
       end
     end
   end

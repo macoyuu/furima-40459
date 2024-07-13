@@ -9,6 +9,7 @@ class PurchaseShipping
   validates :city, presence: true
   validates :street, presence: true
   validates :tel_number, presence: true, format: { with: /\A\d{10,11}\z/, message: "はハイフン抜きで半角数値で入力してください" }
+  validates :token, presence: { message: "カード情報を入力してください" }
 
   def save
       purchase = Purchase.create(user_id: user_id, item_id: item_id)
