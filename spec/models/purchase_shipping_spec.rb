@@ -22,14 +22,15 @@ RSpec.describe PurchaseShipping, type: :model do
       it 'post_codeが空では購入できない' do
         @purchase_shipping.post_code = ''
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Post code can't be blank", "Post code は3桁ハイフン4桁の半角文字列で入力してください")
+        expect(@purchase_shipping.errors.full_messages).to include("Post code can't be blank",
+                                                                   'Post code は3桁ハイフン4桁の半角文字列で入力してください')
       end
       it 'post_codeは全角では購入できない' do
         @purchase_shipping.post_code = '１２３４５６７'
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Post code は3桁ハイフン4桁の半角文字列で入力してください")
+        expect(@purchase_shipping.errors.full_messages).to include('Post code は3桁ハイフン4桁の半角文字列で入力してください')
       end
-        it 'prefecture_idが空では購入できない' do
+      it 'prefecture_idが空では購入できない' do
         @purchase_shipping.prefecture_id = ''
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include("Prefecture can't be blank")
@@ -44,7 +45,7 @@ RSpec.describe PurchaseShipping, type: :model do
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include("City can't be blank")
       end
-        it 'streetが空では購入できない' do
+      it 'streetが空では購入できない' do
         @purchase_shipping.street = ''
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include("Street can't be blank")
@@ -74,10 +75,10 @@ RSpec.describe PurchaseShipping, type: :model do
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include("Item can't be blank")
       end
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @purchase_shipping.token = nil
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Token カード情報を入力してください")
+        expect(@purchase_shipping.errors.full_messages).to include('Token カード情報を入力してください')
       end
     end
   end

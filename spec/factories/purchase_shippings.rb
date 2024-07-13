@@ -3,7 +3,7 @@ FactoryBot.define do
     user_id       { 1 }
     item_id       { 1 }
     post_code { '123-4567' }
-    prefecture_id { Faker::Number.between(from: 2, to: 48) } 
+    prefecture_id { Faker::Number.between(from: 2, to: 48) }
     city { 'あ市' }
     street { '1-1' }
     building { '日本ハイツ' }

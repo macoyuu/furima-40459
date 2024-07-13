@@ -47,6 +47,7 @@ class ItemsController < ApplicationController
 
   def ensure_correct_user
     return if current_user.id == @item.user_id && @item.purchase.nil?
+
     redirect_to root_path
   end
 
