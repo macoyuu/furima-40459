@@ -1,9 +1,9 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :set_item, only: [:index, :create]
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-    @item = Item.find(params[:item_id])
     @purchase_shipping = PurchaseShipping.new
     return unless current_user == @item.user || Purchase.exists?(item_id: @item.id)
 
@@ -12,7 +12,6 @@ class PurchasesController < ApplicationController
 
   def create
     @purchase_shipping = PurchaseShipping.new(purchase_params)
-    @item = Item.find(params[:item_id])
     if @purchase_shipping.valid?
       pay_item
       @purchase_shipping.save
@@ -24,6 +23,10 @@ class PurchasesController < ApplicationController
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
 
   def purchase_params
     params.require(:purchase_shipping).permit(:post_code, :prefecture_id, :city, :street, :building, :tel_number, :purchase).merge(

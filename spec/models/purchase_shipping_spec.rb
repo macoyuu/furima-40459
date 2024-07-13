@@ -65,6 +65,16 @@ RSpec.describe PurchaseShipping, type: :model do
         @purchase_shipping.valid?
         expect(@purchase_shipping.errors.full_messages).to include('Tel number はハイフン抜きで半角数値で入力してください')
       end
+      it 'tel_numberが9桁の場合は購入できない' do
+        @purchase_shipping.tel_number = '080414164'
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include('Tel number はハイフン抜きで半角数値で入力してください')
+      end
+      it 'tel_numberが12桁の場合は購入できない' do
+        @purchase_shipping.tel_number = '080414164944'
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include('Tel number はハイフン抜きで半角数値で入力してください')
+      end
       it 'userが紐付いていないと保存できない' do
         @purchase_shipping.user_id = nil
         @purchase_shipping.valid?
